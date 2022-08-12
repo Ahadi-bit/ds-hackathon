@@ -1,11 +1,10 @@
 import React from "react";
 
-import { Typography } from "@mui/material";
-import { MainTable } from "./components/MainTable";
+import { MainTable, Navigation } from "./components";
 function App() {
   return (
     <div className="App">
-      <Typography variant="h1">sup</Typography>
+      <Navigation />
       <MainTable></MainTable>
     </div>
   );
