@@ -7,6 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./MainTable.module.css";
+import { Urgency } from "../urgency";
+import moment from "moment";
+import { StatusOption } from "../statusOptions";
+import StatusSelect from "./StatusSelect";
 
 interface ITaskDetails {
   facility?: string;
@@ -80,17 +84,16 @@ export const MainTable: FC = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Facility</TableCell>
-              <TableCell>Building</TableCell>
               <TableCell align="center">Room</TableCell>
+              <TableCell align="center">Facility</TableCell>
               <TableCell align="center">Urgency</TableCell>
-              <TableCell align="center">Descriptions</TableCell>
-              <TableCell align="center">creadtedBy</TableCell>
-              <TableCell align="center">Acknowledgement</TableCell>
-              <TableCell align="center">Resolved</TableCell>
+              <TableCell align="center">Description</TableCell>
+              <TableCell align="center">Created By</TableCell>
+              <TableCell align="center">Status</TableCell>
               <TableCell align="center">Converted to Work Order</TableCell>
               <TableCell align="center">Creation Date</TableCell>
-              <TableCell align="center">Resolved Date</TableCell>
+              <TableCell align="center">UpdatedWhen</TableCell>
+              <TableCell align="center">Acknowledged</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,23 +102,22 @@ export const MainTable: FC = () => {
                 key={i}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="center">{row.facility}</TableCell>
-                <TableCell align="center">{row.building}</TableCell>
                 <TableCell align="center">{row.room}</TableCell>
+                <TableCell align="center">{row.facility}</TableCell>
                 <TableCell align="center">{row.urgency}</TableCell>
-                <TableCell align="center">{row.descriptions}</TableCell>
-                <TableCell align="center">{row.creadtedBy}</TableCell>
-                <TableCell align="center">
-                  {row.status !== StatusOption.Open ? "True" : "False"}
-                </TableCell>
-                <TableCell align="center">
-                  {row.resolved ? "True" : "False"}
+                <TableCell align="center">{row.description}</TableCell>
+                <TableCell align="center">{row.createdBy}</TableCell>
+                <TableCell align="right">
+                  <StatusSelect selectedStatus={row.status} />
                 </TableCell>
                 <TableCell align="center">
                   {row.convertedToWo ? "True" : "False"}
                 </TableCell>
-                <TableCell align="center">{row.creationDate}</TableCell>
-                <TableCell align="center">{row.resolutionDate}</TableCell>
+                <TableCell align="center">{row.createdWhen}</TableCell>
+                <TableCell align="center">{row.updatedWhen}</TableCell>
+                <TableCell align="center">
+                  {row.status !== StatusOption.Open ? "True" : "False"}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
